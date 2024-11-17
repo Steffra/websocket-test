@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // In prod: check if secure, then use wss://
-const { status, data, send, open, close } = useWebSocket(`ws://${location.host}/api/websocket`)
+const protocol= window.location.protocol === 'https:' ? 'wss' : 'ws'
+
+const { status, data, send, open, close } = useWebSocket(`${protocol}://${location.host}/api/websocket`)
 
 const history = ref<string[]>([])
 watch(data, (newValue) => {
